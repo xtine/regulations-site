@@ -93,7 +93,15 @@ var CommentView = Backbone.View.extend({
         };
       }).get()
     };
-    window.localStorage.setItem(this.key, JSON.stringify(payload));
+
+    if (payload.comment) {
+      window.localStorage.setItem(this.key, JSON.stringify(payload));
+    }
+    else {
+      // don't keep comment in localstorage if saved comment is empty
+      window.localStorage.removeItem(this.key);
+    }
+
   },
 
   addQueueItem: function(key, name) {
